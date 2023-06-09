@@ -173,7 +173,7 @@
                       (substring retval 0 sep)
                       ))
          (title (and sep
-                     (substring retval (+ sep 2) -1)
+                     (substring retval (+ sep 2) -3)
                      ))
          )
     (when (and url ;; find semi)
@@ -212,7 +212,7 @@
               )))
            (time   (and
                     timeSt
-                    (string-to-number timeSt)))
+                    (- (string-to-number timeSt) web-video-subtitle-offset)))
           )
       (message "position of video [%s] [%s]" timeSt time)
       (unless (> time 0)
@@ -239,7 +239,8 @@
   (save-excursion
     (let* (
            (st (web-extract-timestamp-under-point))
-           (secs (web-timestamp-to-seconds st))
+           (secs (+ (web-timestamp-to-seconds st) web-video-subtitle-offset
+                    ))
           )
       (shell-command-to-string (format "'%s' '%s'"
                                        (web-verify-script web-video-seek-command)
