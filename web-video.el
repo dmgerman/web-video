@@ -73,6 +73,11 @@
   "format to insert url title and format, defaults to org-mode"
   )
 
+
+(defvar web-video-url-position "/some-path/somewhere/video-url-position.scpt"
+  "return the current url with position"
+  )
+
 (defun web-verify-script (pathExec)
   (unless (executable-find pathExec)
     (error (format "executable %s does not exist" pathExec))
@@ -159,6 +164,13 @@
        )
       )
     )
+
+
+(defun web-video-insert-url-position ()
+  (interactive)
+  (shell-command-to-string
+   (web-verify-script web-video-url-position)
+   ))
 
 
 (defun web-video-url-title ()
