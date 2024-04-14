@@ -168,9 +168,14 @@
 
 (defun web-video-insert-url-position ()
   (interactive)
-  (shell-command-to-string
-   (web-verify-script web-video-url-position)
-   ))
+  (let (
+        (url
+         (shell-command-to-string
+          (web-verify-script web-video-url-position)
+          ))
+        )
+    (insert url)
+ ))
 
 
 (defun web-video-url-title ()
